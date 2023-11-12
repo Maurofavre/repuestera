@@ -80,14 +80,9 @@ namespace TP___GONZALES___FAVRE
 
             bool tieneRepetidos = false;
 
-
-
             //convertimos los datos para que se puedan guardar 
             importe = float.Parse(txtNumRep.Text);
             codigo = int.Parse(txtNumRep.Text);
-
-           
-        
 
             //Verificar CANTIDAD de caracteres 
             if (txtNumRep.Text.Length > 6)
@@ -117,7 +112,6 @@ namespace TP___GONZALES___FAVRE
                 return;
             }
 
-
             //Suma nuevos repuestos al arreglo 
             if (pos < max)
             {
@@ -135,7 +129,6 @@ namespace TP___GONZALES___FAVRE
             {
                 MessageBox.Show("Lista llena");
             }
-
 
         }
 
@@ -171,9 +164,7 @@ namespace TP___GONZALES___FAVRE
         private void button3_Click(object sender, EventArgs e)
         {
             dgvDatos.Rows.Clear();
-
-
-             
+       
             int i;
             //imprimir todos ( todos adentro del mismo add 
             if (radTodos.Checked) {
@@ -217,17 +208,6 @@ namespace TP___GONZALES___FAVRE
                 }
 
             }
-
-
-
-
         }
-
-
-
-
-
-
-
     }
 }
