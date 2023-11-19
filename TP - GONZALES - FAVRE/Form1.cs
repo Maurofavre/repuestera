@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,8 +26,8 @@ namespace TP___GONZALES___FAVRE
             public string descripcion;
             public float precio; 
         }
-
-        int codigo =0;
+        int i;
+        int codigo = 0;
         float importe = 0; 
 
         //declaramos el arreglo de struct
@@ -64,7 +66,7 @@ namespace TP___GONZALES___FAVRE
             cmbOpciones.Items.Add("Renault");
             cmbOpciones.SelectedIndex = 0;  
 
-            radTodos.Checked = true;
+           
             //limpiar la grilla 
             dgvDatos.Rows.Clear();  
             
@@ -78,26 +80,20 @@ namespace TP___GONZALES___FAVRE
         private void button1_Click(object sender, EventArgs e)
         {
 
-            bool tieneRepetidos = false;
-
-
-
+            bool tieneRepetidos = false; 
             //convertimos los datos para que se puedan guardar 
             importe = float.Parse(txtNumRep.Text);
             codigo = int.Parse(txtNumRep.Text);
 
-           
-        
-
             //Verificar CANTIDAD de caracteres 
-            if (txtNumRep.Text.Length > 6)
+            if (txtNumRep.Text.Length > 6 && txtNumRep.Text.Length <= 0 )
             {
-                MessageBox.Show("No se admiten mas de 6 caracteres");
+                MessageBox.Show("Controlar Numero");
                 txtNumRep.Text = "";
             }
-            if (txtDescrip.Text.Length > 50)
+            if (txtDescrip.Text.Length > 50 || txtDescrip.Text.Length <= 0)
             {
-                MessageBox.Show("No se admiten mas de 50 caracteres");
+                MessageBox.Show("Controlar Descripcion");
                 txtDescrip.Text = "";
             }
 
@@ -117,7 +113,6 @@ namespace TP___GONZALES___FAVRE
                 return;
             }
 
-
             //Suma nuevos repuestos al arreglo 
             if (pos < max)
             {
@@ -135,10 +130,7 @@ namespace TP___GONZALES___FAVRE
             {
                 MessageBox.Show("Lista llena");
             }
-
-
         }
-
 
         private void txtNumRep_TextChanged(object sender, EventArgs e)
         {
@@ -151,8 +143,7 @@ namespace TP___GONZALES___FAVRE
             {
                 MessageBox.Show("Ingrese solo numeros"); 
                 e.Handled = true;
-                return;
-                
+                return;            
             }
         }
 
@@ -160,7 +151,8 @@ namespace TP___GONZALES___FAVRE
         {
             txtNumRep.Text= "";
             txtDescrip.Text = "";
-            txtPrecio.Text = ""; 
+            txtPrecio.Text = "";
+            dgvDatos.Rows.Clear();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -172,62 +164,48 @@ namespace TP___GONZALES___FAVRE
         {
             dgvDatos.Rows.Clear();
 
+            //ciclo for para ir agrendando 
 
-             
-            int i;
-            //imprimir todos ( todos adentro del mismo add 
-            if (radTodos.Checked) {
-              
-                for ( i = 0; i < pos; i++)
+            for (i = 0; i < pos; i++)
+            {
+                // Imprimir todos
+                if (cmbOpciones.SelectedIndex == 0 || 
+
+                 //si seleccionamos "Marca, filtramos por nombre y nacionalidad
+                   (cmbOpciones.SelectedIndex == 1 && repuestos[i].marca == "Peugueot" && radNacional.Checked && repuestos[i].origen == "Nacional")||
+                   (cmbOpciones.SelectedIndex == 1 && repuestos[i].marca == "Peugueot" && radImport.Checked && repuestos[i].origen == "Importado")||
+
+                   (cmbOpciones.SelectedIndex == 2 && repuestos[i].marca == "Fiat" && radNacional.Checked && repuestos[i].origen == "Nacional") ||
+                   (cmbOpciones.SelectedIndex == 2 && repuestos[i].marca == "Fiat" && radImport.Checked && repuestos[i].origen == "Importado") ||
+
+
+                   (cmbOpciones.SelectedIndex == 3 &&  radNacional.Checked && repuestos[i].origen == "Nacional") ||
+                   (cmbOpciones.SelectedIndex == 3 && radImport.Checked && repuestos[i].origen == "Importado"))
                 {
+                    //recorremos el arreglo 
                     dgvDatos.Rows.Add(repuestos[i].numero_rep.ToString(),
                                       repuestos[i].marca,
                                       repuestos[i].origen,
                                       repuestos[i].descripcion,
-                                      repuestos[i].precio.ToString()) ;
-                }
-            }
-            if (radNacional.Checked)
-            {
-                for ( i = 0; i < pos; i++)
-                {
-                    if (repuestos[i].origen == "Nacional")
-                    {
-                        dgvDatos.Rows.Add(repuestos[i].numero_rep.ToString(),
-                                          repuestos[i].marca.ToString(),
-                                          repuestos[i].origen.ToString(),
-                                          repuestos[i].descripcion.ToString(),
-                                          repuestos[i].precio.ToString());
-                    }
+                                      repuestos[i].precio.ToString());
                 }
 
-            }
-            if (radImport.Checked)
-            {
-                for (i = 0; i < pos; i++)
-                {
-                    if (repuestos[i].origen == "Importado")
-                    {
-                        dgvDatos.Rows.Add(repuestos[i].numero_rep.ToString(),
-                                          repuestos[i].marca.ToString(),
-                                          repuestos[i].origen.ToString(),
-                                          repuestos[i].descripcion.ToString(),
-                                          repuestos[i].precio.ToString());
-                    }
-                }
 
             }
 
 
-
+             
 
         }
 
+        private void cmbOpciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
 
+        private void txtDescrip_TextChanged(object sender, EventArgs e)
+        {
 
-
-
-
+        }
     }
 }

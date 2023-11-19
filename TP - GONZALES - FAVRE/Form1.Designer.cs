@@ -51,7 +51,6 @@
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.radImport = new System.Windows.Forms.RadioButton();
             this.radNacional = new System.Windows.Forms.RadioButton();
-            this.radTodos = new System.Windows.Forms.RadioButton();
             this.cmbOpciones = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -135,6 +134,7 @@
             this.txtDescrip.Name = "txtDescrip";
             this.txtDescrip.Size = new System.Drawing.Size(220, 20);
             this.txtDescrip.TabIndex = 8;
+            this.txtDescrip.TextChanged += new System.EventHandler(this.txtDescrip_TextChanged);
             // 
             // txtNumRep
             // 
@@ -192,7 +192,6 @@
             this.groupBox2.Controls.Add(this.dgvDatos);
             this.groupBox2.Controls.Add(this.radImport);
             this.groupBox2.Controls.Add(this.radNacional);
-            this.groupBox2.Controls.Add(this.radTodos);
             this.groupBox2.Controls.Add(this.cmbOpciones);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label1);
@@ -259,7 +258,7 @@
             // radImport
             // 
             this.radImport.AutoSize = true;
-            this.radImport.Location = new System.Drawing.Point(297, 67);
+            this.radImport.Location = new System.Drawing.Point(212, 67);
             this.radImport.Name = "radImport";
             this.radImport.Size = new System.Drawing.Size(75, 17);
             this.radImport.TabIndex = 5;
@@ -270,25 +269,13 @@
             // radNacional
             // 
             this.radNacional.AutoSize = true;
-            this.radNacional.Location = new System.Drawing.Point(206, 67);
+            this.radNacional.Location = new System.Drawing.Point(124, 67);
             this.radNacional.Name = "radNacional";
             this.radNacional.Size = new System.Drawing.Size(67, 17);
             this.radNacional.TabIndex = 4;
             this.radNacional.TabStop = true;
             this.radNacional.Text = "Nacional";
             this.radNacional.UseVisualStyleBackColor = true;
-            // 
-            // radTodos
-            // 
-            this.radTodos.AutoSize = true;
-            this.radTodos.Location = new System.Drawing.Point(114, 67);
-            this.radTodos.Name = "radTodos";
-            this.radTodos.Size = new System.Drawing.Size(55, 17);
-            this.radTodos.TabIndex = 3;
-            this.radTodos.TabStop = true;
-            this.radTodos.Text = "Todos";
-            this.radTodos.UseVisualStyleBackColor = true;
-            this.radTodos.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // cmbOpciones
             // 
@@ -297,6 +284,7 @@
             this.cmbOpciones.Name = "cmbOpciones";
             this.cmbOpciones.Size = new System.Drawing.Size(121, 21);
             this.cmbOpciones.TabIndex = 2;
+            this.cmbOpciones.SelectedIndexChanged += new System.EventHandler(this.cmbOpciones_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -353,7 +341,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radImport;
         private System.Windows.Forms.RadioButton radNacional;
-        private System.Windows.Forms.RadioButton radTodos;
         private System.Windows.Forms.ComboBox cmbOpciones;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
