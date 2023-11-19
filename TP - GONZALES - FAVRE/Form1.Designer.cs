@@ -62,7 +62,7 @@
             // numRepuesto
             // 
             this.numRepuesto.AutoSize = true;
-            this.numRepuesto.Location = new System.Drawing.Point(6, 55);
+            this.numRepuesto.Location = new System.Drawing.Point(6, 54);
             this.numRepuesto.Name = "numRepuesto";
             this.numRepuesto.Size = new System.Drawing.Size(101, 13);
             this.numRepuesto.TabIndex = 0;
